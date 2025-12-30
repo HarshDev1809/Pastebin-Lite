@@ -63,6 +63,14 @@ export default function Home() {
   const handleMaxViewsChange = (e) => {
     const { value } = e.target;
 
+
+
+    if(isNaN(parseInt(value))){
+      toast.error("Max Views Can only be a positive number");
+      setMaxViews("");
+      return;
+    }
+
     if (value < 1) {
       toast.error("Max Views Can't be less than 1");
       setMaxViews("");
@@ -104,7 +112,7 @@ export default function Home() {
   };
 
   return (
-    <div className=" min-h-screen min-w-screen  p-2 flex flex-col gap-2">
+    <div className=" min-h-screen min-w-screen bg-white p-2 flex flex-col gap-2">
       {/* <Navbar /> */}
       <main className="px-2 mt-2 flex flex-col gap-2 md:px-80">
         <div className="flex flex-col md:flex-row md:gap-2">
@@ -116,7 +124,7 @@ export default function Home() {
             placeholder="Enter you Paste..."
             rows={MIN_ROW}
             cols={MIN_COL}
-             className="border rounded border-gray-300 p-2 md:grow font-semibold"
+             className="border rounded bg-white text-gray-900 border-gray-300 p-2 md:grow font-semibold"
              style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: '16px' }}
             onChange={handlePasteChange}
             value={paste}
@@ -131,7 +139,7 @@ export default function Home() {
             <div className="flex flex-col justify-start items-start grow w-1/2 min-w-1/2">
               {useCustomTime ? (
                 <input
-                  className="border rounded p-2 w-full"
+                  className="border text-gray-800 rounded p-2 w-full"
                   min={0}
                   placeholder="TTL in Seconds"
                   onChange={handleTtlInputChange}
@@ -141,7 +149,7 @@ export default function Home() {
               ) : (
                 <select
                   name="ttl-options"
-                  className="border grow p-2 rounded w-full"
+                  className="border grow p-2 text-gray-800 rounded w-full"
                   id="ttl-options"
                   value={ttl}
                   onChange={(e) => setTtl(e.target.value)}
@@ -174,10 +182,10 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col md:flex-row md:gap-2">
-          <label className="text-nowrap">Max Views:</label>
+          <label className="text-nowrap text-gray-800">Max Views:</label>
           <div className="flex justify-center  w-full flex-row gap-1">
             <input
-              className="border rounded p-2 w-1/2"
+              className="border rounded text-gray-800 p-2 w-1/2"
               value={maxViews}
               type="number"
               placeholder="Max Views..."
@@ -214,7 +222,7 @@ export default function Home() {
 
         {publicLink && (
           <div className="border border-gray-300 rounded flex p-2 bg-gray-100 items-center">
-            <div className="grow font-semibold" style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: '16px' }}>{publicLink}</div>
+            <div className="grow font-semibold text-gray-900" style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: '16px' }}>{publicLink}</div>
             <button
               className={`border border-gray-300 rounded ${copied ? "bg-green-500 hover:bg-green-700" : "bg-blue-500 hover:bg-blue-700"} text-white  cursor-pointer px-4 py-2 whitespace-nowrap`}
               type="button"

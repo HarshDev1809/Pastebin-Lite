@@ -85,10 +85,9 @@ export default function ViewPaste({ params }) {
     }
   };
   return (
-    <div className="pt-2 w-screen bg-white flex justify-center">
+    <div className="py-2 w-screen bg-white flex justify-center">
       {loading ? (
-        <div>
-          {" "}
+        <div className="text-center text-gray-900 max-w-md min-h-[80vh] pt-10">
           <span className="flex items-center justify-center gap-1">
             Loading
             <span className="flex gap-0.5">
@@ -111,7 +110,7 @@ export default function ViewPaste({ params }) {
           </a>
         </div>
       ) : (
-        <div className="px-2 flex flex-col gap-2 w-full md:w-1/2 ">
+        <div className="px-2 flex flex-col gap-2 w-full md:w-1/2 text-gray-900">
           <div className="flex flex-col w-full gap-2 flex-wrap">
             <div>
               <label>Paste : </label>
