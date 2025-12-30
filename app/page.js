@@ -93,10 +93,11 @@ export default function Home() {
         return;
       }
       const { id } = data;
+      toast.success("Paste Saved Successfully.")
 
       setPublicLink(`${process.env.NEXT_PUBLIC_APP_URL}/p/${id}`);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -163,7 +164,7 @@ export default function Home() {
               </button>
             </div>
             <button
-              className="border grow w-1/2 rounded min-w-1/2 cursor-pointer"
+              className="border grow border-red-500 text-red-500 hover:bg-red-50 w-1/2 rounded min-w-1/2 cursor-pointer"
               type="button"
               onClick={() => setTtl("")}
             >
@@ -183,7 +184,7 @@ export default function Home() {
               onChange={handleMaxViewsChange}
             ></input>
             <button
-              className="border grow w-1/2  rounded"
+              className="border grow w-1/2 border-red-500 text-red-500 hover:bg-red-50 cursor-pointer  rounded"
               type="button"
               onClick={() => setMaxViews("")}
             >

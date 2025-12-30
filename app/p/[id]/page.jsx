@@ -32,7 +32,6 @@ export default function ViewPaste({ params }) {
       const res = await fetch(`/api/pastes/${id}`);
       const data = await res.json();
       if (!res.ok) {
-        console.log(data);
         setError(data.error);
         toast.error(data.error || "Failed to fetch Paste");
         return;
@@ -61,7 +60,7 @@ export default function ViewPaste({ params }) {
 
   useEffect(() => {
     if (remainingSec === 0) setError("Paste Expired");
-    if (remainingSec !== null) {
+    if (remainingSec !== null && remainingSec > 0) {
       const interval = setInterval(() => {
         setRemainingSec((prev) => Number(prev) - 1);
       }, 1000);
@@ -86,7 +85,7 @@ export default function ViewPaste({ params }) {
     }
   };
   return (
-    <div className="pt-2 w-screen  flex justify-center">
+    <div className="pt-2 w-screen bg-white flex justify-center">
       {loading ? (
         <div>
           {" "}
@@ -100,8 +99,16 @@ export default function ViewPaste({ params }) {
           </span>
         </div>
       ) : error ? (
-        <div className="p-10 border inline-block">
-          <span>{error}</span>
+        <div className="text-center max-w-md min-h-[80vh] pt-10">
+          <h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
+          <p className="text-xl text-gray-600 mb-2">Paste not found</p>
+          <p className="text-sm text-gray-500 mb-8">{error}</p>
+          <a
+            href="/"
+            className="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors"
+          >
+            Create New Paste
+          </a>
         </div>
       ) : (
         <div className="px-2 flex flex-col gap-2 w-full md:w-1/2 ">
